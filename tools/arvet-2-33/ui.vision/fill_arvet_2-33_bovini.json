@@ -1,0 +1,60 @@
+{
+  "Name": "fill_arvet_2-33_bovini",
+  "CreationDate": "2025-10-25",
+  "Commands": [
+    {
+      "Command": "csvRead",
+      "Target": "provette.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "while_v2",
+      "Target": "${!csvReadStatus} == \"OK\"",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "click",
+      "Target": "xpath=//tr[td[3][normalize-space()='${!COL2}']]//input[starts-with(@id,'ncampione_')]",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "type",
+      "Target": "xpath=//tr[td[3][normalize-space()='${!COL2}']]//input[starts-with(@id,'ncampione_')]",
+      "Value": "${!COL1}",
+      "Description": ""
+    },
+    {
+      "Command": "executeScript_Sandbox",
+      "Target": "return Number(${!csvReadLineNumber})+1",
+      "Value": "!csvReadLineNumber",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "!errorIgnore",
+      "Description": ""
+    },
+    {
+      "Command": "csvRead",
+      "Target": "provette.csv",
+      "Value": "",
+      "Description": ""
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "!errorIgnore",
+      "Description": ""
+    },
+    {
+      "Command": "end",
+      "Target": "",
+      "Value": "",
+      "Description": ""
+    }
+  ]
+}
