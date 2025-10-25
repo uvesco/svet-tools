@@ -1,0 +1,34 @@
+---
+title: "UI Vision"
+---
+
+## Macro UI Vision
+
+UI Vision è un'estensione del browser per l'automazione di attività web ripetitive. Qui troverai le macro sviluppate per semplificare il lavoro con le piattaforme veterinarie.
+
+### Macro disponibili
+
+#### 233 Ovicaprini
+
+Macro per l'automazione dei processi relativi agli ovicaprini nel sistema 233.
+
+- **File**: `tools/uivision/macros/233_ovicaprini.json`
+- **Utilizzo**: Importa il file JSON in UI Vision per utilizzare la macro
+
+#### 233 Bovini
+
+Macro per l'automazione dei processi relativi ai bovini nel sistema 233.
+
+- **File**: `tools/uivision/macros/233_bovini.json`
+- **Utilizzo**: Importa il file JSON in UI Vision per utilizzare la macro
+
+### Come utilizzare le macro
+
+1. Installa l'estensione [UI Vision](https://ui.vision/) per il tuo browser
+2. Scarica il file JSON della macro che ti interessa dal repository
+3. Apri UI Vision e importa il file JSON tramite il menu "Import"
+4. Esegui la macro seguendo le istruzioni specifiche
+
+### Contribuire con nuove macro
+
+Se hai sviluppato macro utili per i servizi veterinari, considera di contribuire al progetto aprendo una pull request sul [repository GitHub](https://github.com/uvesco/svet-tools).

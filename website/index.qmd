@@ -1,0 +1,26 @@
+---
+title: "SVET Tools"
+---
+
+## Benvenuti
+
+Benvenuti nella collezione di strumenti per i servizi veterinari area A in Italia e in Piemonte.
+
+### Cosa troverai qui
+
+Questa piattaforma offre una serie di strumenti interattivi per supportare le attività dei servizi veterinari:
+
+- **Tools R Shiny**: Applicazioni interattive per l'analisi e la gestione dei dati veterinari
+- **UI Vision Macros**: Macro per l'automazione di processi ripetitivi
+
+### Come utilizzare questi strumenti
+
+Naviga attraverso il menu per esplorare gli strumenti disponibili:
+
+- Visita la sezione [Tools](tools.qmd) per accedere alle applicazioni Shiny
+- Consulta la sezione [UI Vision](uivision.qmd) per scaricare le macro disponibili
+- Per maggiori informazioni sul progetto, visita la pagina [About](about.qmd)
+
+### Contribuisci
+
+Questo progetto è open source. Puoi contribuire visitando il [repository GitHub](https://github.com/uvesco/svet-tools).

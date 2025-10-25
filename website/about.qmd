@@ -1,0 +1,37 @@
+---
+title: "About"
+---
+
+## Il Progetto
+
+**SVET Tools** è una collezione di strumenti digitali sviluppati per supportare i servizi veterinari area A in Italia e in particolare in Piemonte.
+
+### Obiettivi
+
+Gli obiettivi principali del progetto sono:
+
+- Semplificare le attività quotidiane dei veterinari attraverso l'automazione
+- Fornire strumenti di analisi dati interattivi e accessibili
+- Creare una community di condivisione di best practices e strumenti
+
+### Tecnologie utilizzate
+
+- **Quarto**: Per la creazione del sito web documentale
+- **R Shiny**: Per le applicazioni interattive di analisi dati
+- **UI Vision**: Per l'automazione di processi web ripetitivi
+
+### Licenza
+
+Questo progetto è distribuito sotto licenza GPL-3.0. Vedi il file [LICENSE](https://github.com/uvesco/svet-tools/blob/main/LICENSE) per i dettagli.
+
+### Contatti e Contributi
+
+Il progetto è open source e accoglie contributi dalla community.
+
+- **Repository GitHub**: [uvesco/svet-tools](https://github.com/uvesco/svet-tools)
+- **Issues**: Per segnalare bug o richiedere nuove funzionalità
+- **Pull Requests**: Per contribuire con codice o documentazione
+
+### Autori
+
+Sviluppato per e con la community dei servizi veterinari italiani.

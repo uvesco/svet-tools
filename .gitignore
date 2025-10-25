@@ -47,3 +47,17 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Quarto
+/.quarto/
+/_site/
+website/.quarto/
+website/_site/
+
+# Shiny
+tools/shiny-provette/renv/
+tools/shiny-provette/.Rprofile
+
+# OS
+.DS_Store
+Thumbs.db
