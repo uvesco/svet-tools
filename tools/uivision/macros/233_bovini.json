@@ -1,0 +1,72 @@
+{
+  "Name": "233_bovini",
+  "CreationDate": "2024-10-25",
+  "Commands": [
+    {
+      "Command": "open",
+      "Target": "https://example.com/sistema233",
+      "Value": "",
+      "Description": "Apre la pagina del sistema 233"
+    },
+    {
+      "Command": "click",
+      "Target": "id=menu_bovini",
+      "Value": "",
+      "Description": "Clicca sul menu bovini"
+    },
+    {
+      "Command": "waitForElementVisible",
+      "Target": "id=form_bovini",
+      "Value": "5000",
+      "Description": "Attende il caricamento del form"
+    },
+    {
+      "Command": "type",
+      "Target": "id=codice_azienda",
+      "Value": "${azienda}",
+      "Description": "Inserisce codice azienda"
+    },
+    {
+      "Command": "select",
+      "Target": "id=tipo_controllo",
+      "Value": "label=Tubercolosi",
+      "Description": "Seleziona tipo controllo"
+    },
+    {
+      "Command": "type",
+      "Target": "id=numero_capi",
+      "Value": "${capi}",
+      "Description": "Inserisce numero capi"
+    },
+    {
+      "Command": "type",
+      "Target": "id=matricola_veterinario",
+      "Value": "${veterinario}",
+      "Description": "Inserisce matricola veterinario"
+    },
+    {
+      "Command": "click",
+      "Target": "id=btn_conferma",
+      "Value": "",
+      "Description": "Conferma inserimento"
+    },
+    {
+      "Command": "waitForElementVisible",
+      "Target": "css=.success-message",
+      "Value": "5000",
+      "Description": "Attende messaggio di conferma"
+    },
+    {
+      "Command": "pause",
+      "Target": "1000",
+      "Value": "",
+      "Description": "Pausa per visualizzazione conferma"
+    },
+    {
+      "Command": "echo",
+      "Target": "Registrazione bovini completata",
+      "Value": "green",
+      "Description": "Messaggio di successo"
+    }
+  ]
+}

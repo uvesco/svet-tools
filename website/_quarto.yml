@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "SVET Tools"
+  description: "Collezione di strumenti per i servizi veterinari area A in Italia e in Piemonte"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Tools"
+        href: tools.qmd
+      - text: "UI Vision"
+        href: uivision.qmd
+      - text: "About"
+        href: about.qmd
+    right:
+      - icon: github
+        href: https://github.com/uvesco/svet-tools
+  
+format:
+  html:
+    theme:
+      - cosmo
+      - styles.scss
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true

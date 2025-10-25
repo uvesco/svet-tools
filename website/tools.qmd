@@ -1,0 +1,37 @@
+---
+title: "Tools"
+---
+
+## Applicazioni R Shiny
+
+Questa sezione raccoglie le applicazioni R Shiny sviluppate per supportare le attività veterinarie.
+
+### Shiny Provette
+
+Un'applicazione interattiva per la gestione e l'analisi delle provette.
+
+**Caratteristiche:**
+
+- Interfaccia utente intuitiva
+- Gestione dati in tempo reale
+- Visualizzazione interattiva dei risultati
+
+**Accesso:**
+
+L'applicazione è disponibile nella cartella `tools/shiny-provette/` del repository.
+
+Per eseguire l'applicazione localmente:
+
+```r
+# Installa le dipendenze necessarie
+renv::restore()
+
+# Esegui l'applicazione
+shiny::runApp("tools/shiny-provette")
+```
+
+### Sviluppi futuri
+
+Sono in programma ulteriori applicazioni Shiny per supportare diverse attività dei servizi veterinari.
+
+Se hai suggerimenti o richieste per nuove applicazioni, apri un'issue sul [repository GitHub](https://github.com/uvesco/svet-tools/issues).
