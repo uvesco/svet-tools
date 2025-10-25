@@ -48,15 +48,19 @@ ui <- fluidPage(
 # Server
 server <- function(input, output, session) {
   
+  # Helper function per creare data frame vuoto
+  create_empty_df <- function() {
+    data.frame(
+      ID = character(),
+      Data = character(),
+      Analisi = character(),
+      Specie = character(),
+      Azienda = character()
+    )
+  }
+  
   # Reactive values per memorizzare i dati
-  provette <- reactiveVal(data.frame(
-    ID = character(),
-    Data = character(),
-    Analisi = character(),
-    Specie = character(),
-    Azienda = character(),
-    stringsAsFactors = FALSE
-  ))
+  provette <- reactiveVal(create_empty_df())
   
   # Aggiungi provetta
   observeEvent(input$aggiungi, {
@@ -66,8 +70,7 @@ server <- function(input, output, session) {
         Data = as.character(input$data_prelievo),
         Analisi = input$tipo_analisi,
         Specie = input$specie,
-        Azienda = input$azienda,
-        stringsAsFactors = FALSE
+        Azienda = input$azienda
       )
       
       provette(rbind(provette(), nuova_provetta))
@@ -84,14 +87,7 @@ server <- function(input, output, session) {
   
   # Reset
   observeEvent(input$reset, {
-    provette(data.frame(
-      ID = character(),
-      Data = character(),
-      Analisi = character(),
-      Specie = character(),
-      Azienda = character(),
-      stringsAsFactors = FALSE
-    ))
+    provette(create_empty_df())
     
     updateTextInput(session, "id_provetta", value = "")
     updateTextInput(session, "azienda", value = "")
