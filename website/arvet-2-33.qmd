@@ -3,28 +3,23 @@ title: "ARVET Batch registra campioni"
 ---
 
 ::: {.callout-tip}
-## Link Utili
-- [Installazione e Configurazione](installazione.qmd) - Come installare Ui.Vision e configurare l'ambiente
-- [Uso Locale](uso-locale.qmd) - Come eseguire l'app sul tuo computer
-- [Risoluzione Problemi](troubleshooting.qmd) - Aiuto per errori comuni
-:::
-
-
 ## Flusso di lavoro completo
 
 Per utilizzare l'applicazione con le macro Ui.Vision:
 
-1. **Prepara i dati Excel**: Assicurati che il file .xlsx contenga colonne per provette e contrassegni
-2. **Usa l'app**: Carica ed esporta il CSV validato (possibilmente in Desktop/uivision/datasources)
-3. **Importa il CSV in Ui.Vision**: Usa il tab CSV in UI.Vision e il tasto "Import CSV"
-4. **Esegui la macro**: Usa la macro appropriata (bovini o ovicaprini) sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
+1. **Prepara i dati Excel**: Assicurati che il file .xlsx contenga almeno una colonna per il numero campione e una per i contrassegni (marche auricolari).
+2. **Usa l'app**: Carica il file .xlsx ed esporta il CSV validato (in Desktop/uivision/datasources)
+3. **Importa il CSV in Ui.Vision**: Usa il tab CSV nella estensione per browser [UI.Vision](installazione.qmd) e il tasto "Import CSV"
+4. **Esegui la macro**: Usa la [macro](uivision.qmd) appropriata ([bovini](uivision.qmd#233bovini) o [ovicaprini](uivision.qmd#233ovicaprini)) sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
+
+:::
 
 ## Usa l'App per la trasformazione del file .xlsx in csv compatibile con UI.Vision
 
 L'applicazione è disponibile online ma, se si dispone localmente di un setup funzionante, di eseguirla localmente:  
 
-- [Eseguire l'applicazione online](https://vesco.shinyapps.io/arvet-2-33/)  
-- [istruzioni per l'uso locale](uso-locale.qmd).
+- [eseguire l'applicazione online](https://vesco.shinyapps.io/arvet-2-33/)  
+- [istruzioni per l'uso locale](uso-locale.qmd) (richiede l'installazione di R e Shiny).
 
 ### Funzionalità
 
@@ -43,15 +38,6 @@ L'applicazione consente di:
   - Se ci sono errori, li elenca in modo dettagliato
 - **Esportare un CSV** nel formato richiesto dalle macro Ui.Vision (quando il file è corretto)
 
-##### Controlli Eseguiti dall'App
-
-L'applicazione esegue i seguenti controlli:
-
-1. **Validità dei Valori**: Tutti i valori devono essere numeri interi ≥ 1
-2. **Sequenza Completa**: Se il massimo valore è N, devono esistere tutti i valori da 1 a N
-3. **Assenza di Duplicati**: Ogni numero di provetta deve apparire una sola volta
-4. **Colonne Distinte**: Le colonne 'provetta' e 'contrassegno' devono essere diverse
-
 #### Flusso di Lavoro
 
 1. **I numeri di provette** sono riportati su un file Excel in una colonna apposita
@@ -62,6 +48,14 @@ L'applicazione esegue i seguenti controlli:
 3. **Se ci sono errori**, l'app li elenca
 4. **Quando il file è corretto**, genera un file .csv pronto da essere utilizzato nella macro Ui.Vision
 
+##### Controlli Eseguiti dall'App
+
+L'applicazione esegue i seguenti controlli:
+
+1. **Validità dei Valori**: Tutti i valori devono essere numeri interi ≥ 1
+2. **Sequenza Completa**: Se il massimo valore è N, devono esistere tutti i valori da 1 a N
+3. **Assenza di Duplicati**: Ogni numero di provetta deve apparire una sola volta
+4. **Colonne Distinte**: Le colonne 'provetta' e 'contrassegno' devono essere diverse
 ### Come Utilizzare l'App
 
 1. **Carica il tuo file Excel**:
@@ -87,22 +81,6 @@ L'applicazione esegue i seguenti controlli:
    - Vai al tab **CSV** nella parte bassa
    - Clicca **"Import CSV"** e seleziona il file scaricato
 
-### Formato del CSV Generato
-
-Il file CSV prodotto ha il seguente formato:
-
-```
-1,IT123456789012
-2,IT234567890123
-3,IT345678901234
-...
-```
-
-Caratteristiche:
-- Due colonne: numero provetta (intero) e contrassegno
-- Nessuna intestazione
-- Valori separati da virgola
-- Solo righe complete (senza valori mancanti)
 
 ### Esempio di Utilizzo
 
@@ -122,8 +100,11 @@ Caratteristiche:
 3,IT345678901234
 ```
 
-
-
+Caratteristiche:
+- Due colonne: numero provetta (intero) e contrassegno
+- Nessuna intestazione
+- Valori separati da virgola
+- Solo righe complete (senza valori mancanti)
 
 ### Link Utili
 

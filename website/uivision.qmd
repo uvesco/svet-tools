@@ -35,7 +35,7 @@ Scarica le macro in formato JSON per importarle in Ui.Vision:
 
 ## Macro disponibili
 
-### ARVET - Bovini
+### ARVET - Bovini {#233bovini}
 
 Macro per l'automazione dell'inserimento dei dati su ARVET campionamenti per i bovini.
 
@@ -47,7 +47,7 @@ Macro per l'automazione dell'inserimento dei dati su ARVET campionamenti per i b
   3. Apri la pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
   4. Avvia la macro da Ui.Vision
 
-### ARVET - Ovicaprini
+### ARVET - Ovicaprini {#233ovicaprini}
 
 Macro per l'automazione dell'inserimento dei dati su ARVET campionamenti per gli ovicaprini.
 
