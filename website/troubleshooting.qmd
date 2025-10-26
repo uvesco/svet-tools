@@ -1,0 +1,178 @@
+---
+title: "Risoluzione Problemi"
+---
+
+## Problemi con Ui.Vision
+
+### La macro non trova il file CSV
+
+**Sintomi**: La macro si interrompe o non riesce a leggere i dati
+
+**Soluzioni**:
+
+- Verifica che il file CSV sia stato importato correttamente tramite il tab **CSV** nella parte bassa della finestra Ui.Vision
+- Assicurati di aver cliccato sul tasto **"Import CSV"** per importare il file `provette.csv`
+- Controlla che il file si chiami esattamente `provette.csv`
+- Assicurati che il file non sia aperto in altri programmi
+
+### La macro non compila i campi
+
+**Sintomi**: La macro si avvia ma non inserisce i dati nella pagina web
+
+**Soluzioni**:
+
+- Verifica di essere sulla pagina corretta del sistema ARVET 2/33: [https://arvet.reteunitaria.piemonte.it/campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
+- Controlla che la struttura della pagina non sia cambiata
+- Verifica che il formato del CSV sia corretto (senza intestazione, senza virgolette)
+- Assicurati che la pagina sia completamente caricata prima di avviare la macro
+
+### Errori durante l'esecuzione
+
+**Sintomi**: La macro si interrompe con un messaggio di errore
+
+**Soluzioni**:
+
+- Controlla i log di Ui.Vision per dettagli sull'errore (tab "Log" nella parte bassa)
+- Verifica che tutti i contrassegni nel CSV esistano nella pagina web
+- Assicurati che non ci siano valori duplicati o mancanti nel CSV
+- Prova a ridurre il numero di righe nel CSV per testare se è un problema di timeout
+
+### L'estensione Ui.Vision non si carica
+
+**Sintomi**: L'icona dell'estensione non appare o non risponde
+
+**Soluzioni**:
+
+- Riavvia il browser
+- Verifica che l'estensione sia abilitata nelle impostazioni del browser
+- Prova a disinstallare e reinstallare l'estensione
+- Controlla che non ci siano conflitti con altre estensioni
+
+## Problemi con l'App ARVET Batch registra campioni
+
+### Errore: "le colonne 'contrassegno' e 'provetta' non possono essere le stesse"
+
+**Causa**: Hai selezionato la stessa colonna per entrambi i campi
+
+**Soluzione**: Seleziona colonne diverse per 'provetta' e 'contrassegno'
+
+### Errore: "la colonna 'provetta' contiene valori non numerici"
+
+**Causa**: La colonna provetta contiene testo o caratteri speciali
+
+**Soluzione**: 
+
+- Verifica che la colonna contenga solo numeri
+- Rimuovi eventuali spazi, testi o caratteri speciali
+- Controlla che il formato delle celle in Excel sia numerico
+
+### Errore: "i valori di 'provetta' devono essere >= 1"
+
+**Causa**: Alcuni numeri di provetta sono zero o negativi
+
+**Soluzione**: Assicurati che tutti i numeri di provetta siano maggiori o uguali a 1
+
+### "MANCANTI (N): ..."
+
+**Causa**: Nella sequenza 1..N mancano alcuni numeri
+
+**Soluzione**: 
+
+- Verifica il tuo file Excel e aggiungi le righe mancanti
+- Oppure rinumera le provette per avere una sequenza completa
+- I numeri mancanti sono elencati nel messaggio di errore
+
+### "DUPLICATI (N valori): ..."
+
+**Causa**: Alcuni numeri di provetta appaiono più volte
+
+**Soluzione**: 
+
+- Rimuovi o correggi le righe duplicate nel file Excel
+- I valori duplicati sono elencati con il numero di ripetizioni (es. "5×2" = il valore 5 appare 2 volte)
+
+### Il file CSV scaricato non funziona con la macro
+
+**Causa**: Formato CSV non corretto
+
+**Soluzione**:
+
+- Assicurati di aver scaricato il CSV dall'app e non di averlo creato manualmente
+- Verifica che il file sia salvato con codifica UTF-8
+- Non aprire e modificare il CSV con Excel prima di usarlo
+- Importa il CSV direttamente in Ui.Vision tramite il tab CSV
+
+## Problemi con l'Esecuzione Locale (R/RStudio)
+
+### Errore: "cannot find function"
+
+**Causa**: Pacchetti mancanti o non caricati
+
+**Soluzione**:
+
+```r
+# Ripristina le dipendenze
+renv::restore()
+
+# Se il problema persiste, reinstalla il pacchetto specifico
+install.packages("nome_pacchetto")
+```
+
+### Errore: "impossibile aprire la connessione"
+
+**Causa**: Percorso file non trovato o directory di lavoro errata
+
+**Soluzione**:
+
+```r
+# Verifica la directory corrente
+getwd()
+
+# Imposta la directory corretta
+setwd("percorso/corretto/tools/arvet-2-33")
+```
+
+### L'app Shiny non si avvia
+
+**Causa**: Porta già in uso o errori nel codice
+
+**Soluzione**:
+
+- Chiudi altre sessioni R che potrebbero usare la stessa porta
+- Specifica una porta diversa: `shiny::runApp(port = 8100)`
+- Controlla i messaggi di errore nella console R
+
+## Problemi Generali
+
+### Il sito web non si carica correttamente
+
+**Soluzione**:
+
+- Svuota la cache del browser
+- Prova con un browser diverso
+- Verifica la connessione internet
+
+### Non riesco a scaricare i file dal repository
+
+**Soluzione**:
+
+- Verifica di avere accesso al repository GitHub
+- Prova a scaricare il repository completo come ZIP
+- Usa `git clone` se hai Git installato
+
+## Contatti per Supporto
+
+Se i problemi persistono dopo aver provato le soluzioni sopra:
+
+- Apri un'issue sul [repository GitHub](https://github.com/uvesco/svet-tools/issues)
+- Includi nei dettagli:
+  - Descrizione del problema
+  - Messaggi di errore completi
+  - Passi per riprodurre il problema
+  - Sistema operativo e versione del browser
+
+## Link Utili
+
+- [Torna alla Home](index.qmd)
+- [Installazione e Configurazione](installazione.qmd)
+- [Uso Locale](uso-locale.qmd)

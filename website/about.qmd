@@ -34,4 +34,6 @@ Il progetto è open source e accoglie contributi dalla community.
 
 ### Autori
 
+- **Umberto Vesco - ASLTO3**
+
 Sviluppato per e con la community dei servizi veterinari italiani.

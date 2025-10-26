@@ -6,16 +6,26 @@ title: "Tools"
 
 Questa sezione raccoglie le applicazioni R Shiny sviluppate per supportare le attività veterinarie.
 
-### ARVET 2/33 - Generatore CSV
+### ARVET Batch registra campioni
 
-Un'applicazione per preparare i dati CSV da utilizzare con le macro UI.Vision per ARVET 2/33.
+Un'applicazione per preparare i dati per l'inserimento della corrispondenza tra numero campione e contrassegno su [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti) da un file Excel (.xlsx). L'app genera un file CSV utilizzabile con le macro Ui.Vision.
 
 **Caratteristiche:**
 
 - Caricamento di file Excel con dati di provette e contrassegni
-- Validazione automatica dei dati (sequenza completa, assenza di duplicati)
-- Esportazione CSV nel formato richiesto dalle macro UI.Vision
-- Controlli di qualità con messaggi di errore dettagliati
+- Validazione automatica dei dati:
+  - Verifica che non ci siano duplicati
+  - Controlla che non ci siano numeri mancanti nella sequenza
+  - Verifica che tutti i numeri siano interi positivi
+  - Se ci sono errori, li elenca in modo dettagliato
+- Esportazione CSV nel formato richiesto dalle macro Ui.Vision (quando il file è corretto)
+
+**Flusso di lavoro:**
+
+1. I numeri di provette sono riportati su un file Excel in una colonna apposita
+2. L'app verifica che non ci siano duplicati, numeri mancanti o numeri che non sono interi positivi
+3. Se ci sono errori, l'app li elenca
+4. Quando il file è corretto, l'app genera un file .csv pronto da essere utilizzato nella macro Ui.Vision
 
 **Accesso:**
 
@@ -23,44 +33,9 @@ Un'applicazione per preparare i dati CSV da utilizzare con le macro UI.Vision pe
 - [Documentazione completa](arvet-2-33.qmd) con istruzioni dettagliate
 - Codice sorgente: `tools/arvet-2-33/` nel repository
 
-Per eseguire l'applicazione localmente (opzionale):
+**Utilizzo con Ui.Vision:**
 
-```r
-# Installa le dipendenze necessarie
-setwd("tools/arvet-2-33")
-renv::restore()
-
-# Esegui l'applicazione
-shiny::runApp()
-```
-
-**Utilizzo con UI.Vision:**
-
-Questa app è progettata per funzionare insieme alle [macro UI.Vision per ARVET 2/33](uivision.qmd#arvet-233---bovini). Segui il [workflow completo](arvet-2-33.qmd#workflow-completo) per utilizzare app e macro insieme.
-
-### Shiny Provette
-
-Un'applicazione interattiva per la gestione e l'analisi delle provette.
-
-**Caratteristiche:**
-
-- Interfaccia utente intuitiva
-- Gestione dati in tempo reale
-- Visualizzazione interattiva dei risultati
-
-**Accesso:**
-
-L'applicazione è disponibile nella cartella `tools/shiny-provette/` del repository.
-
-Per eseguire l'applicazione localmente:
-
-```r
-# Installa le dipendenze necessarie
-renv::restore()
-
-# Esegui l'applicazione
-shiny::runApp("tools/shiny-provette")
-```
+Questa app è progettata per funzionare insieme alle [macro Ui.Vision per ARVET](uivision.qmd). Segui il [workflow completo](arvet-2-33.qmd#workflow-completo) per utilizzare app e macro insieme.
 
 ### Sviluppi futuri
 

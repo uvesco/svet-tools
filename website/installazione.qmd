@@ -1,0 +1,65 @@
+---
+title: "Installazione e Configurazione"
+---
+
+## Installazione Ui.Vision
+
+### Installare l'Estensione
+
+1. **Scarica l'estensione** per il tuo browser:
+   - [Chrome/Edge](https://chrome.google.com/webstore/detail/ui-vision-rpa/gcbalfbdmfieckjlnblleoemohcganoc)
+   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/rpa/)
+
+2. **Installa l'estensione** seguendo le istruzioni del tuo browser
+
+3. **Verifica l'installazione**:
+   - Clicca sull'icona dell'estensione nella barra degli strumenti
+   - Si dovrebbe aprire l'interfaccia di Ui.Vision
+
+### Configurare Ui.Vision per le Macro
+
+1. **Apri Ui.Vision** cliccando sull'icona dell'estensione
+
+2. **Scarica le macro** dal repository:
+   - Vai alla cartella [`tools/arvet-2-33/ui.vision`](https://github.com/uvesco/svet-tools/tree/main/tools/arvet-2-33/ui.vision)
+   - Scarica i file JSON delle macro che ti servono
+
+3. **Importa le macro**:
+   - In Ui.Vision, clicca su "Macro" nella barra laterale
+   - Clicca sul pulsante "Import JSON" (icona con freccia verso il basso)
+   - Seleziona il file JSON scaricato
+   - La macro apparirà nella lista delle macro disponibili
+
+4. **Importa il file CSV**:
+   - Per le macro ARVET 2/33, è necessario un file CSV chiamato `provette.csv`
+   - Dalla finestra dell'estensione Ui.Vision, utilizza il tab **CSV** nella parte bassa
+   - Clicca sul tasto **"Import CSV"** e seleziona il file `provette.csv` generato dall'app
+
+## Installazione R e RStudio
+
+Se vuoi eseguire le applicazioni localmente, avrai bisogno di:
+
+### Installare R
+
+1. Scarica R dal sito ufficiale: [CRAN](https://cran.r-project.org/)
+2. Segui le istruzioni di installazione per il tuo sistema operativo
+3. Verifica l'installazione aprendo R e controllando la versione (>= 4.3.0)
+
+### Installare RStudio (Opzionale)
+
+RStudio è un ambiente di sviluppo integrato per R che facilita l'utilizzo delle applicazioni.
+
+1. Scarica RStudio Desktop: [RStudio](https://posit.co/download/rstudio-desktop/)
+2. Installa seguendo le istruzioni per il tuo sistema operativo
+
+### Configurare il Progetto
+
+1. Clona il repository o scarica i file
+2. Apri RStudio e imposta la directory di lavoro sulla cartella del progetto
+3. Le dipendenze verranno gestite automaticamente tramite `renv`
+
+## Link Utili
+
+- [Torna alla Home](index.qmd)
+- [Strumenti disponibili](tools.qmd)
+- [Uso Locale delle App](uso-locale.qmd)

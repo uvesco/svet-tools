@@ -1,0 +1,79 @@
+---
+title: "Uso Locale"
+---
+
+## Eseguire le Applicazioni Localmente
+
+Questa sezione è dedicata agli utenti che vogliono eseguire le applicazioni Shiny direttamente sul proprio computer utilizzando R o RStudio.
+
+::: {.callout-note}
+**Nota**: La maggior parte degli utenti può utilizzare l'[app online](arvet-2-33.qmd#usa-lapp-online) senza dover installare R o RStudio.
+:::
+
+## Prerequisiti
+
+Prima di procedere, assicurati di aver:
+
+- Installato R (>= 4.3.0)
+- Opzionalmente installato RStudio
+- Clonato o scaricato il repository
+
+Per le istruzioni di installazione, consulta la pagina [Installazione e Configurazione](installazione.qmd).
+
+## ARVET Batch registra campioni
+
+### Esecuzione da R
+
+Per eseguire l'applicazione dalla console R:
+
+```r
+# Imposta la directory di lavoro
+setwd("tools/arvet-2-33")
+
+# Installa le dipendenze (solo la prima volta)
+renv::restore()
+
+# Avvia l'applicazione
+shiny::runApp()
+```
+
+### Esecuzione da RStudio
+
+1. Apri RStudio
+2. Apri il file `tools/arvet-2-33/app.R`
+3. Clicca sul pulsante "Run App" nella parte superiore dell'editor
+4. L'applicazione si aprirà in una nuova finestra o nel pannello Viewer
+
+### Gestione delle Dipendenze
+
+Il progetto utilizza `renv` per gestire le dipendenze:
+
+- **Prima esecuzione**: `renv::restore()` installerà tutte le dipendenze necessarie
+- **Aggiornamento dipendenze**: `renv::update()` aggiornerà i pacchetti
+- **Snapshot**: `renv::snapshot()` salverà lo stato attuale delle dipendenze
+
+## Sviluppo e Debug
+
+### Modalità Sviluppatore
+
+Per eseguire l'app in modalità sviluppo con auto-reload:
+
+```r
+options(shiny.autoreload = TRUE)
+shiny::runApp()
+```
+
+### Debug
+
+Per abilitare il debug:
+
+```r
+options(shiny.trace = TRUE)
+shiny::runApp()
+```
+
+## Link Utili
+
+- [Torna alla Home](index.qmd)
+- [Installazione e Configurazione](installazione.qmd)
+- [Risoluzione Problemi](troubleshooting.qmd)
