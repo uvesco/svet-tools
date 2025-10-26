@@ -2,6 +2,13 @@
 title: "ARVET Batch registra campioni"
 ---
 
+::: {.callout-tip}
+## Link Utili
+- [Installazione e Configurazione](installazione.qmd) - Come installare Ui.Vision e configurare l'ambiente
+- [Uso Locale](uso-locale.qmd) - Come eseguire l'app sul tuo computer
+- [Risoluzione Problemi](troubleshooting.qmd) - Aiuto per errori comuni
+:::
+
 ## Usa l'App Online
 
 L'applicazione è disponibile online e può essere utilizzata direttamente dal browser:

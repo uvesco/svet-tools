@@ -6,6 +6,13 @@ title: "Ui.Vision"
 
 Ui.Vision è un'estensione del browser per l'automazione di attività web ripetitive. Qui troverai le macro sviluppate per semplificare il lavoro con le piattaforme veterinarie.
 
+## Download Macro
+
+Scarica le macro in formato JSON per importarle in Ui.Vision:
+
+- [Download: fill_arvet_2-33_bovini.json](https://raw.githubusercontent.com/uvesco/svet-tools/main/tools/arvet-2-33/ui.vision/fill_arvet_2-33_bovini.json) - Macro per bovini
+- [Download: fill_arvet_2_33_ovicaprini.json](https://raw.githubusercontent.com/uvesco/svet-tools/main/tools/arvet-2-33/ui.vision/fill_arvet_2_33_ovicaprini.json) - Macro per ovicaprini
+
 ## Uso delle Macro
 
 ### Come utilizzare le macro Ui.Vision
@@ -32,7 +39,7 @@ Ui.Vision è un'estensione del browser per l'automazione di attività web ripeti
 
 Macro per l'automazione dell'inserimento dei dati su ARVET campionamenti per i bovini.
 
-- **File**: `fill_arvet_2-33_bovini.json`
+- **File**: `fill_arvet_2-33_bovini.json` - [Download](https://raw.githubusercontent.com/uvesco/svet-tools/main/tools/arvet-2-33/ui.vision/fill_arvet_2-33_bovini.json)
 - **Requisiti**: File `provette.csv` importato tramite il tab CSV di Ui.Vision
 - **Utilizzo**: 
   1. Prepara il file CSV usando l'[app](arvet-2-33.qmd)
@@ -44,7 +51,7 @@ Macro per l'automazione dell'inserimento dei dati su ARVET campionamenti per i b
 
 Macro per l'automazione dell'inserimento dei dati su ARVET campionamenti per gli ovicaprini.
 
-- **File**: `fill_arvet_2_33_ovicaprini.json`
+- **File**: `fill_arvet_2_33_ovicaprini.json` - [Download](https://raw.githubusercontent.com/uvesco/svet-tools/main/tools/arvet-2-33/ui.vision/fill_arvet_2_33_ovicaprini.json)
 - **Requisiti**: File `provette.csv` importato tramite il tab CSV di Ui.Vision
 - **Utilizzo**: 
   1. Prepara il file CSV usando l'[app](arvet-2-33.qmd)
