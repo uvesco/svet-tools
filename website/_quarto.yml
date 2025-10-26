@@ -11,6 +11,8 @@ website:
         href: index.qmd
       - text: "Tools"
         href: tools.qmd
+      - text: "ARVET 2/33"
+        href: arvet-2-33.qmd
       - text: "UI Vision"
         href: uivision.qmd
       - text: "About"

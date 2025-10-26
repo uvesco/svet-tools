@@ -6,29 +6,103 @@ title: "UI Vision"
 
 UI Vision è un'estensione del browser per l'automazione di attività web ripetitive. Qui troverai le macro sviluppate per semplificare il lavoro con le piattaforme veterinarie.
 
-### Macro disponibili
+## Installazione e Configurazione
 
-#### 233 Ovicaprini
+### Installare UI.Vision
 
-Macro per l'automazione dei processi relativi agli ovicaprini nel sistema 233.
+1. **Scarica l'estensione** per il tuo browser:
+   - [Chrome/Edge](https://chrome.google.com/webstore/detail/ui-vision-rpa/gcbalfbdmfieckjlnblleoemohcganoc)
+   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/rpa/)
 
-- **File**: `tools/uivision/macros/233_ovicaprini.json`
-- **Utilizzo**: Importa il file JSON in UI Vision per utilizzare la macro
+2. **Installa l'estensione** seguendo le istruzioni del tuo browser
 
-#### 233 Bovini
+3. **Verifica l'installazione**:
+   - Clicca sull'icona dell'estensione nella barra degli strumenti
+   - Si dovrebbe aprire l'interfaccia di UI.Vision
 
-Macro per l'automazione dei processi relativi ai bovini nel sistema 233.
+### Configurare UI.Vision per le Macro
 
-- **File**: `tools/uivision/macros/233_bovini.json`
-- **Utilizzo**: Importa il file JSON in UI Vision per utilizzare la macro
+1. **Apri UI.Vision** cliccando sull'icona dell'estensione
 
-### Come utilizzare le macro
+2. **Scarica le macro** dal repository:
+   - Vai alla cartella [`tools/arvet-2-33/ui.vision`](https://github.com/uvesco/svet-tools/tree/main/tools/arvet-2-33/ui.vision)
+   - Scarica i file JSON delle macro che ti servono
 
-1. Installa l'estensione [UI Vision](https://ui.vision/) per il tuo browser
-2. Scarica il file JSON della macro che ti interessa dal repository
-3. Apri UI Vision e importa il file JSON tramite il menu "Import"
-4. Esegui la macro seguendo le istruzioni specifiche
+3. **Importa le macro**:
+   - In UI.Vision, clicca su "Macro" nella barra laterale
+   - Clicca sul pulsante "Import JSON" (icona con freccia verso il basso)
+   - Seleziona il file JSON scaricato
+   - La macro apparirà nella lista delle macro disponibili
 
-### Contribuire con nuove macro
+4. **Prepara il file CSV**:
+   - Per le macro ARVET 2/33, è necessario un file CSV chiamato `provette.csv`
+   - Il file deve contenere due colonne: numero provetta e contrassegno
+   - Il file deve essere salvato nella cartella predefinita di UI.Vision (di solito `Desktop`)
+   - **Importante**: Il CSV deve essere senza intestazione e senza virgolette
+
+## Macro disponibili
+
+### ARVET 2/33 - Bovini
+
+Macro per l'automazione dell'inserimento dei dati nel sistema ARVET 2/33 per i bovini.
+
+- **File**: `fill_arvet_2-33_bovini.json`
+- **Requisiti**: File `provette.csv` con formato: `<numero_provetta>,<contrassegno>`
+- **Utilizzo**: 
+  1. Prepara il file CSV usando l'[app generatore CSV](arvet-2-33.qmd)
+  2. Apri la pagina ARVET 2/33 per bovini nel browser
+  3. Avvia la macro da UI.Vision
+  4. La macro compilerà automaticamente i campi per ogni riga del CSV
+
+### ARVET 2/33 - Ovicaprini
+
+Macro per l'automazione dell'inserimento dei dati nel sistema ARVET 2/33 per gli ovicaprini.
+
+- **File**: `fill_arvet_2_33_ovicaprini.json`
+- **Requisiti**: File `provette.csv` con formato: `<numero_provetta>,<contrassegno>`
+- **Utilizzo**: 
+  1. Prepara il file CSV usando l'[app generatore CSV](arvet-2-33.qmd)
+  2. Apri la pagina ARVET 2/33 per ovicaprini nel browser
+  3. Avvia la macro da UI.Vision
+  4. La macro compilerà automaticamente i campi per ogni riga del CSV
+
+## Workflow Completo per ARVET 2/33
+
+Per utilizzare le macro ARVET 2/33, segui questo flusso di lavoro:
+
+1. **Prepara i dati**: Utilizza l'[applicazione Shiny per generare il CSV](arvet-2-33.qmd)
+   - Carica il tuo file Excel
+   - Seleziona le colonne corrette
+   - Verifica che i controlli siano superati
+   - Scarica il file `provette.csv`
+
+2. **Configura UI.Vision**: Assicurati che il file `provette.csv` sia nella posizione corretta (Desktop o cartella predefinita di UI.Vision)
+
+3. **Esegui la macro**:
+   - Apri la pagina web ARVET 2/33 pertinente
+   - Seleziona la macro corretta in UI.Vision (bovini o ovicaprini)
+   - Clicca su "Play Macro"
+   - La macro processerà automaticamente tutte le righe del CSV
+
+4. **Verifica**: Controlla che tutti i dati siano stati inseriti correttamente
+
+## Risoluzione Problemi
+
+### La macro non trova il file CSV
+- Verifica che il file si chiami esattamente `provette.csv`
+- Controlla che sia nella cartella corretta (solitamente Desktop)
+- Assicurati che il file non sia aperto in altri programmi
+
+### La macro non compila i campi
+- Verifica di essere sulla pagina corretta del sistema ARVET 2/33
+- Controlla che la struttura della pagina non sia cambiata
+- Verifica che il formato del CSV sia corretto (senza intestazione, senza virgolette)
+
+### Errori durante l'esecuzione
+- Controlla i log di UI.Vision per dettagli sull'errore
+- Verifica che tutti i contrassegni nel CSV esistano nella pagina web
+- Assicurati che non ci siano valori duplicati o mancanti
+
+## Contribuire con nuove macro
 
 Se hai sviluppato macro utili per i servizi veterinari, considera di contribuire al progetto aprendo una pull request sul [repository GitHub](https://github.com/uvesco/svet-tools).
