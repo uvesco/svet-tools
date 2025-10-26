@@ -10,17 +10,11 @@ website:
       - text: "Home"
         href: index.qmd
       - text: "Tools"
-        href: tools.qmd
-      - text: "ARVET Batch"
-        href: arvet-2-33.qmd
-      - text: "Ui.Vision"
-        href: uivision.qmd
-      - text: "Installazione"
-        href: installazione.qmd
-      - text: "Uso Locale"
-        href: uso-locale.qmd
-      - text: "Troubleshooting"
-        href: troubleshooting.qmd
+        menu:
+          - text: "ARVET Batch Campioni"
+            href: arvet-2-33.qmd
+          - text: "Ui.Vision"
+            href: uivision.qmd
       - text: "About"
         href: about.qmd
     right:
