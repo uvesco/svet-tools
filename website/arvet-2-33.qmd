@@ -2,6 +2,14 @@
 title: "ARVET 2/33 - Generatore CSV"
 ---
 
+## Usa l'App Online
+
+L'applicazione è disponibile online e può essere utilizzata direttamente dal browser:
+
+<iframe src="https://vesco.shinyapps.io/arvet-2-33/" width="100%" height="800px" style="border: 1px solid #ccc; border-radius: 4px;"></iframe>
+
+---
+
 ## Applicazione per Generare CSV per Macro ARVET 2/33
 
 Questa applicazione Shiny permette di preparare i dati per le macro UI.Vision ARVET 2/33 (bovini e ovicaprini).
@@ -23,6 +31,12 @@ L'applicazione consente di:
   - Line ending CRLF (Windows)
 
 ### Come Utilizzare l'App
+
+#### Opzione 1: Usa l'App Online (Consigliato)
+
+L'app è disponibile online nella sezione sopra. Basta caricare il file Excel e seguire le istruzioni.
+
+#### Opzione 2: Esegui l'Applicazione Localmente
 
 1. **Esegui l'applicazione localmente**:
 
