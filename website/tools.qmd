@@ -19,10 +19,11 @@ Un'applicazione per preparare i dati CSV da utilizzare con le macro UI.Vision pe
 
 **Accesso:**
 
+- **[Usa l'app online](arvet-2-33.qmd#usa-lapp-online)** - disponibile direttamente nel browser
 - [Documentazione completa](arvet-2-33.qmd) con istruzioni dettagliate
 - Codice sorgente: `tools/arvet-2-33/` nel repository
 
-Per eseguire l'applicazione localmente:
+Per eseguire l'applicazione localmente (opzionale):
 
 ```r
 # Installa le dipendenze necessarie

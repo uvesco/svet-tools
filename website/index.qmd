@@ -27,7 +27,7 @@ Naviga attraverso il menu per esplorare gli strumenti disponibili:
 
 Per automatizzare l'inserimento dati in ARVET 2/33:
 
-1. Utilizza l'[app Shiny ARVET 2/33](arvet-2-33.qmd) per generare il file CSV dai tuoi dati Excel
+1. Utilizza l'[app Shiny ARVET 2/33 online](arvet-2-33.qmd#usa-lapp-online) per generare il file CSV dai tuoi dati Excel
 2. Installa e configura [UI.Vision](uivision.qmd) seguendo le istruzioni dettagliate
 3. Esegui la macro appropriata (bovini o ovicaprini) per compilare automaticamente i campi
 
