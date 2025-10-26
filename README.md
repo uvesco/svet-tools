@@ -10,18 +10,20 @@ svet-tools/
 │  ├─ _quarto.yml       # Configurazione Quarto
 │  ├─ index.qmd         # Homepage
 │  ├─ tools.qmd         # Pagina strumenti
-│  ├─ uivision.qmd      # Pagina UI Vision
+│  ├─ arvet-2-33.qmd    # ARVET Batch registra campioni
+│  ├─ uivision.qmd      # Pagina Ui.Vision
+│  ├─ installazione.qmd # Installazione e configurazione
+│  ├─ uso-locale.qmd    # Uso locale delle app
+│  ├─ troubleshooting.qmd # Risoluzione problemi
 │  ├─ about.qmd         # Pagina about
 │  └─ styles.scss       # Stili personalizzati
 ├─ tools/                # Strumenti
-│  ├─ shiny-provette/   # App Shiny gestione provette
-│  │  ├─ app.R          # Applicazione Shiny
-│  │  ├─ renv.lock      # Lock file dipendenze
-│  │  └─ www/           # Assets statici
-│  └─ uivision/         # Macro UI Vision
-│     └─ macros/
-│        ├─ 233_ovicaprini.json  # Macro per ovicaprini
-│        └─ 233_bovini.json      # Macro per bovini
+│  └─ arvet-2-33/       # App ARVET Batch registra campioni
+│     ├─ app.R          # Applicazione Shiny
+│     ├─ renv.lock      # Lock file dipendenze
+│     └─ ui.vision/     # Macro Ui.Vision
+│        ├─ fill_arvet_2-33_bovini.json
+│        └─ fill_arvet_2_33_ovicaprini.json
 ├─ LICENSE
 ├─ README.md
 └─ .gitignore
@@ -49,32 +51,35 @@ quarto preview
 
 ### Applicazioni R Shiny
 
-#### Shiny Provette
+#### ARVET Batch registra campioni
 
-Un'applicazione interattiva per la gestione delle provette veterinarie.
+Un'applicazione per preparare i dati per l'inserimento della corrispondenza tra numero campione e contrassegno su ARVET da un file Excel (.xlsx).
 
 Per eseguire l'applicazione:
 
 ```r
 # Installa le dipendenze
+setwd("tools/arvet-2-33")
 renv::restore()
 
 # Esegui l'app
-shiny::runApp("tools/shiny-provette")
+shiny::runApp()
 ```
 
-### Macro UI Vision
+L'app è anche disponibile online: [https://vesco.shinyapps.io/arvet-2-33/](https://vesco.shinyapps.io/arvet-2-33/)
 
-Le macro UI Vision automatizzano processi ripetitivi sui sistemi web veterinari:
+### Macro Ui.Vision
 
-- **233_ovicaprini.json**: Automazione per gestione ovicaprini nel sistema 233
-- **233_bovini.json**: Automazione per gestione bovini nel sistema 233
+Le macro Ui.Vision automatizzano processi ripetitivi sui sistemi web veterinari:
+
+- **fill_arvet_2-33_bovini.json**: Automazione per inserimento dati bovini su ARVET campionamenti
+- **fill_arvet_2_33_ovicaprini.json**: Automazione per inserimento dati ovicaprini su ARVET campionamenti
 
 ## Requisiti
 
-- **R** (>= 4.3.0) per le applicazioni Shiny
+- **R** (>= 4.3.0) per le applicazioni Shiny (opzionale, disponibile anche online)
 - **Quarto** per la compilazione del sito web
-- **UI Vision** browser extension per l'utilizzo delle macro
+- **Ui.Vision** browser extension per l'utilizzo delle macro
 
 ## Contribuire
 

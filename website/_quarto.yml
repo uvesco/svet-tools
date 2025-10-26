@@ -11,10 +11,16 @@ website:
         href: index.qmd
       - text: "Tools"
         href: tools.qmd
-      - text: "ARVET 2/33"
+      - text: "ARVET Batch"
         href: arvet-2-33.qmd
-      - text: "UI Vision"
+      - text: "Ui.Vision"
         href: uivision.qmd
+      - text: "Installazione"
+        href: installazione.qmd
+      - text: "Uso Locale"
+        href: uso-locale.qmd
+      - text: "Troubleshooting"
+        href: troubleshooting.qmd
       - text: "About"
         href: about.qmd
     right:

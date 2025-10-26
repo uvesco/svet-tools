@@ -18,7 +18,7 @@ Gli obiettivi principali del progetto sono:
 
 - **Quarto**: Per la creazione del sito web documentale
 - **R Shiny**: Per le applicazioni interattive di analisi dati
-- **UI Vision**: Per l'automazione di processi web ripetitivi
+- **Ui.Vision**: Per l'automazione di processi web ripetitivi
 
 ### Licenza
 
@@ -33,5 +33,7 @@ Il progetto è open source e accoglie contributi dalla community.
 - **Pull Requests**: Per contribuire con codice o documentazione
 
 ### Autori
+
+- **Umberto Vesco - ASLTO3**
 
 Sviluppato per e con la community dei servizi veterinari italiani.

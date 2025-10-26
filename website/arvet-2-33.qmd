@@ -1,5 +1,5 @@
 ---
-title: "ARVET 2/33 - Generatore CSV"
+title: "ARVET Batch registra campioni"
 ---
 
 ## Usa l'App Online
@@ -10,9 +10,9 @@ L'applicazione è disponibile online e può essere utilizzata direttamente dal b
 
 ---
 
-## Applicazione per Generare CSV per Macro ARVET 2/33
+## Applicazione per l'Inserimento Dati su ARVET
 
-Questa applicazione Shiny permette di preparare i dati per le macro UI.Vision ARVET 2/33 (bovini e ovicaprini).
+Questa applicazione permette di preparare i dati per l'inserimento della corrispondenza tra numero campione e contrassegno sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti) da un file Excel (.xlsx).
 
 ### Funzionalità
 
@@ -21,57 +21,46 @@ L'applicazione consente di:
 - **Caricare un file Excel** con i dati di provette e contrassegni
 - **Selezionare le colonne** corrette dal file caricato
 - **Validare automaticamente** i dati:
-  - Verifica che le provette siano numeri interi ≥ 1
-  - Controlla la sequenza completa 1..N senza valori mancanti
-  - Identifica e elenca tutti i duplicati
-- **Esportare un CSV** nel formato richiesto dalle macro UI.Vision:
-  - Senza intestazione
-  - Senza virgolette
-  - Codifica UTF-8
-  - Line ending CRLF (Windows)
+  - Verifica che le provette siano numeri interi positivi (≥ 1)
+  - Controlla che non ci siano numeri mancanti nella sequenza 1..N
+  - Verifica che non ci siano duplicati
+  - Se ci sono errori, li elenca in modo dettagliato
+- **Esportare un CSV** nel formato richiesto dalle macro Ui.Vision (quando il file è corretto)
+
+### Flusso di Lavoro
+
+1. **I numeri di provette** sono riportati su un file Excel in una colonna apposita
+2. **L'app verifica** che non ci siano:
+   - Duplicati
+   - Numeri mancanti
+   - Numeri che non sono interi positivi
+3. **Se ci sono errori**, l'app li elenca
+4. **Quando il file è corretto**, genera un file .csv pronto da essere utilizzato nella macro Ui.Vision
 
 ### Come Utilizzare l'App
 
-#### Opzione 1: Usa l'App Online (Consigliato)
-
-L'app è disponibile online nella sezione sopra. Basta caricare il file Excel e seguire le istruzioni.
-
-#### Opzione 2: Esegui l'Applicazione Localmente
-
-1. **Esegui l'applicazione localmente**:
-
-```r
-# Assicurati di essere nella directory del progetto
-setwd("tools/arvet-2-33")
-
-# Installa le dipendenze (prima volta)
-renv::restore()
-
-# Avvia l'applicazione
-shiny::runApp()
-```
-
-2. **Carica il tuo file Excel**:
+1. **Carica il tuo file Excel**:
    - Clicca su "Seleziona file .xlsx (dal tuo PC)"
    - Scegli il file Excel contenente i dati delle provette
 
-3. **Seleziona le colonne**:
+2. **Seleziona le colonne**:
    - **Colonna 'provetta'**: La colonna con i numeri delle provette
    - **Colonna 'contrassegno'**: La colonna con i contrassegni degli animali
    - L'app seleziona automaticamente la prima colonna per 'provetta' e la seconda per 'contrassegno'
 
-4. **Verifica i controlli**:
+3. **Verifica i controlli**:
    - L'app mostra un riepilogo dei dati caricati
-   - Vengono effettuati controlli automatici:
-     - **Provette valide**: Devono essere numeri interi ≥ 1
-     - **Sequenza completa**: La sequenza deve andare da 1 a N senza interruzioni
-     - **Nessun duplicato**: Ogni numero di provetta deve apparire una sola volta
+   - Vengono effettuati controlli automatici
    - Se ci sono errori, vengono elencati tutti i valori mancanti o duplicati
 
-5. **Esporta il CSV**:
+4. **Esporta il CSV**:
    - Se tutti i controlli sono superati, appare il pulsante "Esporta CSV"
    - Clicca per scaricare il file `provette.csv`
-   - Il file viene anche salvato automaticamente sul Desktop (lato server)
+
+5. **Importa in Ui.Vision**:
+   - Apri la finestra dell'estensione Ui.Vision
+   - Vai al tab **CSV** nella parte bassa
+   - Clicca **"Import CSV"** e seleziona il file scaricato
 
 ### Formato del CSV Generato
 
@@ -88,7 +77,6 @@ Caratteristiche:
 - Due colonne: numero provetta (intero) e contrassegno
 - Nessuna intestazione
 - Valori separati da virgola
-- Nessuna virgoletta
 - Solo righe complete (senza valori mancanti)
 
 ### Esempio di Utilizzo
@@ -109,77 +97,26 @@ Caratteristiche:
 3,IT345678901234
 ```
 
-### Validazioni Eseguite
+### Controlli Eseguiti dall'App
 
 L'applicazione esegue i seguenti controlli:
 
-#### 1. Validità dei Valori di Provetta
-- Tutti i valori devono essere numeri interi
-- Tutti i valori devono essere ≥ 1
-- I valori NA vengono esclusi dal controllo
-
-#### 2. Sequenza Completa
-- Se il massimo valore è N, devono esistere tutti i valori da 1 a N
-- Se mancano valori, vengono elencati tutti i numeri mancanti
-
-#### 3. Assenza di Duplicati
-- Ogni numero di provetta deve apparire una sola volta
-- Se ci sono duplicati, vengono elencati con il numero di ripetizioni
-
-#### 4. Colonne Distinte
-- Le colonne 'provetta' e 'contrassegno' devono essere diverse
-
-### Messaggi di Errore
-
-#### "Errore: le colonne 'contrassegno' e 'provetta' non possono essere le stesse"
-Hai selezionato la stessa colonna per entrambi i campi. Seleziona colonne diverse.
-
-#### "Errore: la colonna 'provetta' contiene valori non numerici"
-La colonna provetta deve contenere solo numeri. Verifica che non ci siano testi o caratteri speciali.
-
-#### "Errore: i valori di 'provetta' devono essere >= 1"
-Tutti i numeri di provetta devono essere maggiori o uguali a 1.
-
-#### "MANCANTI (N): ..."
-Nella sequenza 1..N mancano alcuni numeri. Vengono elencati tutti i valori mancanti.
-
-#### "DUPLICATI (N valori): ..."
-Alcuni numeri di provetta appaiono più volte. Vengono elencati i valori duplicati con il numero di ripetizioni (es. "5×2" = il valore 5 appare 2 volte).
+1. **Validità dei Valori**: Tutti i valori devono essere numeri interi ≥ 1
+2. **Sequenza Completa**: Se il massimo valore è N, devono esistere tutti i valori da 1 a N
+3. **Assenza di Duplicati**: Ogni numero di provetta deve apparire una sola volta
+4. **Colonne Distinte**: Le colonne 'provetta' e 'contrassegno' devono essere diverse
 
 ### Workflow Completo
 
-Per utilizzare l'applicazione con le macro UI.Vision:
+Per utilizzare l'applicazione con le macro Ui.Vision:
 
 1. **Prepara i dati Excel**: Assicurati che il file contenga colonne per provette e contrassegni
-2. **Esegui l'app Shiny**: Carica ed esporta il CSV validato
-3. **Salva il CSV**: Il file `provette.csv` viene salvato sul Desktop
-4. **Importa le macro**: Segui le [istruzioni per UI.Vision](uivision.qmd#installazione-e-configurazione)
-5. **Esegui la macro**: Usa la macro appropriata (bovini o ovicaprini) su ARVET 2/33
-
-### Requisiti Tecnici
-
-- **R** (>= 4.3.0)
-- **Pacchetti R necessari**:
-  - `shiny`
-  - `readxl`
-  - `dplyr`
-
-I pacchetti vengono gestiti automaticamente tramite `renv`.
-
-### Percorso nel Repository
-
-L'applicazione si trova in:
-```
-tools/arvet-2-33/
-├── app.R           # Codice dell'applicazione Shiny
-├── renv.lock       # Dipendenze R
-└── ui.vision/      # Macro UI.Vision associate
-    ├── fill_arvet_2-33_bovini.json
-    └── fill_arvet_2_33_ovicaprini.json
-```
+2. **Usa l'app online**: Carica ed esporta il CSV validato
+3. **Importa il CSV in Ui.Vision**: Usa il tab CSV e il tasto "Import CSV"
+4. **Esegui la macro**: Usa la macro appropriata (bovini o ovicaprini) sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
 
 ### Link Utili
 
-- [Torna a UI Vision](uivision.qmd) per le istruzioni sulle macro
-- [Torna a Tools](tools.qmd) per altri strumenti disponibili
-- [Repository GitHub](https://github.com/uvesco/svet-tools) per il codice sorgente
+- [Macro Ui.Vision](uivision.qmd) per le istruzioni sulle macro
+- [Risoluzione Problemi](troubleshooting.qmd) per aiuto con errori comuni
+- [Uso Locale](uso-locale.qmd) per eseguire l'app sul tuo computer

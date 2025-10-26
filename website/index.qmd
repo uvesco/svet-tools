@@ -10,26 +10,26 @@ Benvenuti nella collezione di strumenti per i servizi veterinari area A in Itali
 
 Questa piattaforma offre una serie di strumenti interattivi per supportare le attività dei servizi veterinari:
 
-- **Tools R Shiny**: Applicazioni interattive per l'analisi e la gestione dei dati veterinari
-- **ARVET 2/33**: Generatore CSV per alimentare le macro di automazione
-- **UI Vision Macros**: Macro per l'automazione di processi ripetitivi sui sistemi web
+- **ARVET Batch registra campioni**: App online per preparare dati e macro Ui.Vision per l'inserimento automatico su ARVET
+- **Macro Ui.Vision**: Macro per l'automazione di processi ripetitivi sui sistemi web
 
 ### Come utilizzare questi strumenti
 
 Naviga attraverso il menu per esplorare gli strumenti disponibili:
 
-- Visita la sezione [Tools](tools.qmd) per accedere alle applicazioni Shiny
-- Consulta la sezione [ARVET 2/33](arvet-2-33.qmd) per generare file CSV per le macro
-- Visita la sezione [UI Vision](uivision.qmd) per installare e configurare le macro
+- Visita la sezione [ARVET Batch](arvet-2-33.qmd) per usare l'app online
+- Consulta la sezione [Ui.Vision](uivision.qmd) per le macro disponibili
+- Per installare e configurare gli strumenti, visita [Installazione](installazione.qmd)
 - Per maggiori informazioni sul progetto, visita la pagina [About](about.qmd)
 
-### Workflow ARVET 2/33
+### Workflow ARVET Batch registra campioni
 
-Per automatizzare l'inserimento dati in ARVET 2/33:
+Per automatizzare l'inserimento dati su ARVET:
 
-1. Utilizza l'[app Shiny ARVET 2/33 online](arvet-2-33.qmd#usa-lapp-online) per generare il file CSV dai tuoi dati Excel
-2. Installa e configura [UI.Vision](uivision.qmd) seguendo le istruzioni dettagliate
-3. Esegui la macro appropriata (bovini o ovicaprini) per compilare automaticamente i campi
+1. Utilizza l'[app online ARVET Batch registra campioni](arvet-2-33.qmd#usa-lapp-online) per generare il file CSV dai tuoi dati Excel
+2. Installa e configura [Ui.Vision](installazione.qmd) seguendo le istruzioni
+3. Importa il file CSV generato in Ui.Vision tramite il tab **CSV** e il tasto **"Import CSV"**
+4. Esegui la macro appropriata (bovini o ovicaprini) sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
 
 ### Contribuisci
 
