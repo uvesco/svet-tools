@@ -9,19 +9,28 @@ title: "ARVET Batch registra campioni"
 - [Risoluzione Problemi](troubleshooting.qmd) - Aiuto per errori comuni
 :::
 
-## Usa l'App Online
 
-L'applicazione è disponibile online e può essere utilizzata direttamente dal browser:
+## Flusso di lavoro completo
 
-<iframe src="https://vesco.shinyapps.io/arvet-2-33/" width="100%" height="800px" style="border: 1px solid #ccc; border-radius: 4px;"></iframe>
+Per utilizzare l'applicazione con le macro Ui.Vision:
 
----
+1. **Prepara i dati Excel**: Assicurati che il file .xlsx contenga colonne per provette e contrassegni
+2. **Usa l'app**: Carica ed esporta il CSV validato (possibilmente in Desktop/uivision/datasources)
+3. **Importa il CSV in Ui.Vision**: Usa il tab CSV in UI.Vision e il tasto "Import CSV"
+4. **Esegui la macro**: Usa la macro appropriata (bovini o ovicaprini) sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
 
-## Applicazione per l'Inserimento Dati su ARVET
+## Usa l'App per la trasformazione del file .xlsx in csv compatibile con UI.Vision
+
+L'applicazione è disponibile online ma, se si dispone localmente di un setup funzionante, di eseguirla localmente:  
+
+- [Eseguire l'applicazione online](https://vesco.shinyapps.io/arvet-2-33/)  
+- [istruzioni per l'uso locale](uso-locale.qmd).
+
+### Funzionalità
 
 Questa applicazione permette di preparare i dati per l'inserimento della corrispondenza tra numero campione e contrassegno sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti) da un file Excel (.xlsx).
 
-### Funzionalità
+#### Passi
 
 L'applicazione consente di:
 
@@ -34,7 +43,16 @@ L'applicazione consente di:
   - Se ci sono errori, li elenca in modo dettagliato
 - **Esportare un CSV** nel formato richiesto dalle macro Ui.Vision (quando il file è corretto)
 
-### Flusso di Lavoro
+##### Controlli Eseguiti dall'App
+
+L'applicazione esegue i seguenti controlli:
+
+1. **Validità dei Valori**: Tutti i valori devono essere numeri interi ≥ 1
+2. **Sequenza Completa**: Se il massimo valore è N, devono esistere tutti i valori da 1 a N
+3. **Assenza di Duplicati**: Ogni numero di provetta deve apparire una sola volta
+4. **Colonne Distinte**: Le colonne 'provetta' e 'contrassegno' devono essere diverse
+
+#### Flusso di Lavoro
 
 1. **I numeri di provette** sono riportati su un file Excel in una colonna apposita
 2. **L'app verifica** che non ci siano:
@@ -104,23 +122,8 @@ Caratteristiche:
 3,IT345678901234
 ```
 
-### Controlli Eseguiti dall'App
 
-L'applicazione esegue i seguenti controlli:
 
-1. **Validità dei Valori**: Tutti i valori devono essere numeri interi ≥ 1
-2. **Sequenza Completa**: Se il massimo valore è N, devono esistere tutti i valori da 1 a N
-3. **Assenza di Duplicati**: Ogni numero di provetta deve apparire una sola volta
-4. **Colonne Distinte**: Le colonne 'provetta' e 'contrassegno' devono essere diverse
-
-### Workflow Completo
-
-Per utilizzare l'applicazione con le macro Ui.Vision:
-
-1. **Prepara i dati Excel**: Assicurati che il file contenga colonne per provette e contrassegni
-2. **Usa l'app online**: Carica ed esporta il CSV validato
-3. **Importa il CSV in Ui.Vision**: Usa il tab CSV e il tasto "Import CSV"
-4. **Esegui la macro**: Usa la macro appropriata (bovini o ovicaprini) sulla pagina [ARVET campionamenti](https://arvet.reteunitaria.piemonte.it/campionamenti)
 
 ### Link Utili
 
