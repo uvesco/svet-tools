@@ -6,6 +6,37 @@ title: "Tools"
 
 Questa sezione raccoglie le applicazioni R Shiny sviluppate per supportare le attività veterinarie.
 
+### ARVET 2/33 - Generatore CSV
+
+Un'applicazione per preparare i dati CSV da utilizzare con le macro UI.Vision per ARVET 2/33.
+
+**Caratteristiche:**
+
+- Caricamento di file Excel con dati di provette e contrassegni
+- Validazione automatica dei dati (sequenza completa, assenza di duplicati)
+- Esportazione CSV nel formato richiesto dalle macro UI.Vision
+- Controlli di qualità con messaggi di errore dettagliati
+
+**Accesso:**
+
+- [Documentazione completa](arvet-2-33.qmd) con istruzioni dettagliate
+- Codice sorgente: `tools/arvet-2-33/` nel repository
+
+Per eseguire l'applicazione localmente:
+
+```r
+# Installa le dipendenze necessarie
+setwd("tools/arvet-2-33")
+renv::restore()
+
+# Esegui l'applicazione
+shiny::runApp()
+```
+
+**Utilizzo con UI.Vision:**
+
+Questa app è progettata per funzionare insieme alle [macro UI.Vision per ARVET 2/33](uivision.qmd#arvet-233---bovini). Segui il [workflow completo](arvet-2-33.qmd#workflow-completo) per utilizzare app e macro insieme.
+
 ### Shiny Provette
 
 Un'applicazione interattiva per la gestione e l'analisi delle provette.
