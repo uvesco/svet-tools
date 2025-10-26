@@ -1,0 +1,171 @@
+---
+title: "ARVET 2/33 - Generatore CSV"
+---
+
+## Applicazione per Generare CSV per Macro ARVET 2/33
+
+Questa applicazione Shiny permette di preparare i dati per le macro UI.Vision ARVET 2/33 (bovini e ovicaprini).
+
+### Funzionalità
+
+L'applicazione consente di:
+
+- **Caricare un file Excel** con i dati di provette e contrassegni
+- **Selezionare le colonne** corrette dal file caricato
+- **Validare automaticamente** i dati:
+  - Verifica che le provette siano numeri interi ≥ 1
+  - Controlla la sequenza completa 1..N senza valori mancanti
+  - Identifica e elenca tutti i duplicati
+- **Esportare un CSV** nel formato richiesto dalle macro UI.Vision:
+  - Senza intestazione
+  - Senza virgolette
+  - Codifica UTF-8
+  - Line ending CRLF (Windows)
+
+### Come Utilizzare l'App
+
+1. **Esegui l'applicazione localmente**:
+
+```r
+# Assicurati di essere nella directory del progetto
+setwd("tools/arvet-2-33")
+
+# Installa le dipendenze (prima volta)
+renv::restore()
+
+# Avvia l'applicazione
+shiny::runApp()
+```
+
+2. **Carica il tuo file Excel**:
+   - Clicca su "Seleziona file .xlsx (dal tuo PC)"
+   - Scegli il file Excel contenente i dati delle provette
+
+3. **Seleziona le colonne**:
+   - **Colonna 'provetta'**: La colonna con i numeri delle provette
+   - **Colonna 'contrassegno'**: La colonna con i contrassegni degli animali
+   - L'app seleziona automaticamente la prima colonna per 'provetta' e la seconda per 'contrassegno'
+
+4. **Verifica i controlli**:
+   - L'app mostra un riepilogo dei dati caricati
+   - Vengono effettuati controlli automatici:
+     - **Provette valide**: Devono essere numeri interi ≥ 1
+     - **Sequenza completa**: La sequenza deve andare da 1 a N senza interruzioni
+     - **Nessun duplicato**: Ogni numero di provetta deve apparire una sola volta
+   - Se ci sono errori, vengono elencati tutti i valori mancanti o duplicati
+
+5. **Esporta il CSV**:
+   - Se tutti i controlli sono superati, appare il pulsante "Esporta CSV"
+   - Clicca per scaricare il file `provette.csv`
+   - Il file viene anche salvato automaticamente sul Desktop (lato server)
+
+### Formato del CSV Generato
+
+Il file CSV prodotto ha il seguente formato:
+
+```
+1,IT123456789012
+2,IT234567890123
+3,IT345678901234
+...
+```
+
+Caratteristiche:
+- Due colonne: numero provetta (intero) e contrassegno
+- Nessuna intestazione
+- Valori separati da virgola
+- Nessuna virgoletta
+- Solo righe complete (senza valori mancanti)
+
+### Esempio di Utilizzo
+
+**File Excel di Input:**
+
+| Provetta | Contrassegno | Altre colonne... |
+|----------|--------------|------------------|
+| 1 | IT123456789012 | ... |
+| 2 | IT234567890123 | ... |
+| 3 | IT345678901234 | ... |
+
+**File CSV di Output:**
+
+```
+1,IT123456789012
+2,IT234567890123
+3,IT345678901234
+```
+
+### Validazioni Eseguite
+
+L'applicazione esegue i seguenti controlli:
+
+#### 1. Validità dei Valori di Provetta
+- Tutti i valori devono essere numeri interi
+- Tutti i valori devono essere ≥ 1
+- I valori NA vengono esclusi dal controllo
+
+#### 2. Sequenza Completa
+- Se il massimo valore è N, devono esistere tutti i valori da 1 a N
+- Se mancano valori, vengono elencati tutti i numeri mancanti
+
+#### 3. Assenza di Duplicati
+- Ogni numero di provetta deve apparire una sola volta
+- Se ci sono duplicati, vengono elencati con il numero di ripetizioni
+
+#### 4. Colonne Distinte
+- Le colonne 'provetta' e 'contrassegno' devono essere diverse
+
+### Messaggi di Errore
+
+#### "Errore: le colonne 'contrassegno' e 'provetta' non possono essere le stesse"
+Hai selezionato la stessa colonna per entrambi i campi. Seleziona colonne diverse.
+
+#### "Errore: la colonna 'provetta' contiene valori non numerici"
+La colonna provetta deve contenere solo numeri. Verifica che non ci siano testi o caratteri speciali.
+
+#### "Errore: i valori di 'provetta' devono essere >= 1"
+Tutti i numeri di provetta devono essere maggiori o uguali a 1.
+
+#### "MANCANTI (N): ..."
+Nella sequenza 1..N mancano alcuni numeri. Vengono elencati tutti i valori mancanti.
+
+#### "DUPLICATI (N valori): ..."
+Alcuni numeri di provetta appaiono più volte. Vengono elencati i valori duplicati con il numero di ripetizioni (es. "5×2" = il valore 5 appare 2 volte).
+
+### Workflow Completo
+
+Per utilizzare l'applicazione con le macro UI.Vision:
+
+1. **Prepara i dati Excel**: Assicurati che il file contenga colonne per provette e contrassegni
+2. **Esegui l'app Shiny**: Carica ed esporta il CSV validato
+3. **Salva il CSV**: Il file `provette.csv` viene salvato sul Desktop
+4. **Importa le macro**: Segui le [istruzioni per UI.Vision](uivision.qmd#installazione-e-configurazione)
+5. **Esegui la macro**: Usa la macro appropriata (bovini o ovicaprini) su ARVET 2/33
+
+### Requisiti Tecnici
+
+- **R** (>= 4.3.0)
+- **Pacchetti R necessari**:
+  - `shiny`
+  - `readxl`
+  - `dplyr`
+
+I pacchetti vengono gestiti automaticamente tramite `renv`.
+
+### Percorso nel Repository
+
+L'applicazione si trova in:
+```
+tools/arvet-2-33/
+├── app.R           # Codice dell'applicazione Shiny
+├── renv.lock       # Dipendenze R
+└── ui.vision/      # Macro UI.Vision associate
+    ├── fill_arvet_2-33_bovini.json
+    └── fill_arvet_2_33_ovicaprini.json
+```
+
+### Link Utili
+
+- [Torna a UI Vision](uivision.qmd) per le istruzioni sulle macro
+- [Torna a Tools](tools.qmd) per altri strumenti disponibili
+- [Repository GitHub](https://github.com/uvesco/svet-tools) per il codice sorgente

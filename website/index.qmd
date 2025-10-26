@@ -11,15 +11,25 @@ Benvenuti nella collezione di strumenti per i servizi veterinari area A in Itali
 Questa piattaforma offre una serie di strumenti interattivi per supportare le attività dei servizi veterinari:
 
 - **Tools R Shiny**: Applicazioni interattive per l'analisi e la gestione dei dati veterinari
-- **UI Vision Macros**: Macro per l'automazione di processi ripetitivi
+- **ARVET 2/33**: Generatore CSV per alimentare le macro di automazione
+- **UI Vision Macros**: Macro per l'automazione di processi ripetitivi sui sistemi web
 
 ### Come utilizzare questi strumenti
 
 Naviga attraverso il menu per esplorare gli strumenti disponibili:
 
 - Visita la sezione [Tools](tools.qmd) per accedere alle applicazioni Shiny
-- Consulta la sezione [UI Vision](uivision.qmd) per scaricare le macro disponibili
+- Consulta la sezione [ARVET 2/33](arvet-2-33.qmd) per generare file CSV per le macro
+- Visita la sezione [UI Vision](uivision.qmd) per installare e configurare le macro
 - Per maggiori informazioni sul progetto, visita la pagina [About](about.qmd)
+
+### Workflow ARVET 2/33
+
+Per automatizzare l'inserimento dati in ARVET 2/33:
+
+1. Utilizza l'[app Shiny ARVET 2/33](arvet-2-33.qmd) per generare il file CSV dai tuoi dati Excel
+2. Installa e configura [UI.Vision](uivision.qmd) seguendo le istruzioni dettagliate
+3. Esegui la macro appropriata (bovini o ovicaprini) per compilare automaticamente i campi
 
 ### Contribuisci
 
