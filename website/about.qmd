@@ -12,7 +12,6 @@ Gli obiettivi principali del progetto sono:
 
 - Semplificare le attività quotidiane dei veterinari attraverso l'automazione
 - Fornire strumenti di analisi dati interattivi e accessibili
-- Creare una community di condivisione di best practices e strumenti
 
 ### Tecnologie utilizzate
 
