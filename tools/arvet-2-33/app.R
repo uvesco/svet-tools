@@ -25,7 +25,7 @@ ui <- fluidPage(
             tags$ol(
                 tags$li("Seleziona il file .xlsx dal tuo computer."),
                 tags$li("Scegli la colonna 'provetta' (prima) e 'contrassegno' (dopo)."),
-                tags$li("Controlli: interi ≥1, sequenza completa 1..N, elenco completo di mancanti e duplicati."),
+                tags$li("Controlli: interi ≥1, sequenza completa 1..N, nessun duplicato in provetta e contrassegno, elenco completo di mancanti e duplicati."),
                 tags$li("Se tutto OK, esporta un CSV senza virgolette/intestazione (UTF-8, CRLF).")
             )
         )
@@ -58,8 +58,23 @@ server <- function(input, output, session) {
         req(dati(), input$col_contr, input$col_prov)
         df <- dati()
         
+        # Lista dei controlli con risultati
+        controlli <- list()
+        ok_generale <- TRUE
+        
         if (identical(input$col_contr, input$col_prov)) {
-            return(list(ok = FALSE, msg = "Errore: le colonne 'contrassegno' e 'provetta' non possono essere le stesse."))
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Colonne diverse (provetta ≠ contrassegno)",
+                ok = FALSE,
+                dettaglio = "Le colonne selezionate sono identiche"
+            )
+            ok_generale <- FALSE
+        } else {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Colonne diverse (provetta ≠ contrassegno)",
+                ok = TRUE,
+                dettaglio = NULL
+            )
         }
         
         contr <- df[[input$col_contr]]
@@ -67,17 +82,74 @@ server <- function(input, output, session) {
         
         prov_non_na <- prov[!is.na(prov)]
         suppressWarnings(prov_num <- as.numeric(prov_non_na))
+        
+        # Controllo: valori numerici
         if (any(is.na(prov_num))) {
-            return(list(ok = FALSE, msg = "Errore: la colonna 'provetta' contiene valori non numerici (esclusi NA)."))
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: valori numerici",
+                ok = FALSE,
+                dettaglio = "Contiene valori non numerici (esclusi NA)"
+            )
+            ok_generale <- FALSE
+        } else {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: valori numerici",
+                ok = TRUE,
+                dettaglio = NULL
+            )
         }
-        if (!all(abs(prov_num - round(prov_num)) < 1e-9)) {
-            return(list(ok = FALSE, msg = "Errore: la colonna 'provetta' deve contenere solo numeri interi (esclusi NA)."))
+        
+        # Controllo: numeri interi
+        if (length(prov_num) > 0 && !all(abs(prov_num - round(prov_num)) < 1e-9)) {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: numeri interi",
+                ok = FALSE,
+                dettaglio = "Deve contenere solo numeri interi"
+            )
+            ok_generale <- FALSE
+        } else if (length(prov_num) > 0) {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: numeri interi",
+                ok = TRUE,
+                dettaglio = NULL
+            )
         }
-        if (any(prov_num < 1)) {
-            return(list(ok = FALSE, msg = "Errore: i valori di 'provetta' devono essere >= 1."))
+        
+        # Controllo: valori >= 1
+        if (length(prov_num) > 0 && any(prov_num < 1)) {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: valori >= 1",
+                ok = FALSE,
+                dettaglio = "Alcuni valori sono minori di 1"
+            )
+            ok_generale <- FALSE
+        } else if (length(prov_num) > 0) {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: valori >= 1",
+                ok = TRUE,
+                dettaglio = NULL
+            )
         }
+        
+        # Controllo: almeno un valore valido
         if (length(prov_num) == 0) {
-            return(list(ok = FALSE, msg = "Errore: nessun valore valido in 'provetta' (tutti NA?)."))
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: almeno un valore valido",
+                ok = FALSE,
+                dettaglio = "Nessun valore valido (tutti NA?)"
+            )
+            ok_generale <- FALSE
+        } else {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: almeno un valore valido",
+                ok = TRUE,
+                dettaglio = NULL
+            )
+        }
+        
+        # Se ci sono già errori, restituisci subito
+        if (!ok_generale) {
+            return(list(ok = FALSE, controlli = controlli, info = NULL))
         }
         
         prov_int <- as.integer(round(prov_num))
@@ -87,9 +159,66 @@ server <- function(input, output, session) {
         
         mancanti <- setdiff(attesi, presenti)
         
+        # Controllo: valori mancanti in provetta
+        if (length(mancanti) > 0) {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: sequenza completa (1..N)",
+                ok = FALSE,
+                dettaglio = sprintf("MANCANTI (%d): %s", length(mancanti), paste(mancanti, collapse = ", "))
+            )
+            ok_generale <- FALSE
+        } else {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: sequenza completa (1..N)",
+                ok = TRUE,
+                dettaglio = NULL
+            )
+        }
+        
+        # Controllo: duplicati in provetta
         tab <- table(prov_int)
         dup_values <- as.integer(names(tab)[tab > 1])
         dup_counts <- as.integer(tab[tab > 1])
+        
+        if (length(dup_values) > 0) {
+            dup_pairs <- paste0(dup_values, "×", dup_counts)
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: nessun duplicato",
+                ok = FALSE,
+                dettaglio = sprintf("DUPLICATI (%d valori): %s", length(dup_values), paste(dup_pairs, collapse = ", "))
+            )
+            ok_generale <- FALSE
+        } else {
+            controlli[[length(controlli) + 1]] <- list(
+                check = "Provetta: nessun duplicato",
+                ok = TRUE,
+                dettaglio = NULL
+            )
+        }
+        
+        # NUOVO: Controllo duplicati in contrassegno
+        contr_non_na <- contr[!is.na(contr)]
+        if (length(contr_non_na) > 0) {
+            tab_contr <- table(contr_non_na)
+            dup_contr_values <- names(tab_contr)[tab_contr > 1]
+            dup_contr_counts <- as.integer(tab_contr[tab_contr > 1])
+            
+            if (length(dup_contr_values) > 0) {
+                dup_contr_pairs <- paste0(dup_contr_values, "×", dup_contr_counts)
+                controlli[[length(controlli) + 1]] <- list(
+                    check = "Contrassegno: nessun duplicato",
+                    ok = FALSE,
+                    dettaglio = sprintf("DUPLICATI (%d valori): %s", length(dup_contr_values), paste(dup_contr_pairs, collapse = ", "))
+                )
+                ok_generale <- FALSE
+            } else {
+                controlli[[length(controlli) + 1]] <- list(
+                    check = "Contrassegno: nessun duplicato",
+                    ok = TRUE,
+                    dettaglio = NULL
+                )
+            }
+        }
         
         n_provette_valide <- length(prov_num)
         n_contr_non_na    <- sum(!is.na(contr))
@@ -99,25 +228,8 @@ server <- function(input, output, session) {
             n_provette_valide, N, n_contr_non_na
         )
         
-        error_msgs <- character()
-        if (length(mancanti) > 0) {
-            error_msgs <- c(error_msgs, sprintf("MANCANTI (%d): %s", length(mancanti), paste(mancanti, collapse = ", ")))
-        }
-        if (length(dup_values) > 0) {
-            dup_pairs <- paste0(dup_values, "×", dup_counts)
-            error_msgs <- c(error_msgs, sprintf("DUPLICATI (%d valori): %s", length(dup_values), paste(dup_pairs, collapse = ", ")))
-        }
-        
-        if (length(error_msgs) > 0) {
-            return(list(
-                ok   = FALSE,
-                msg  = paste(c("Errori nei controlli:", error_msgs), collapse = "\n"),
-                info = info
-            ))
-        }
-        
-        list(ok = TRUE,
-             msg = "Controllo superato: sequenza 1..N completa, nessun valore mancante o duplicato.",
+        list(ok = ok_generale,
+             controlli = controlli,
              info = info,
              N = N)
     })
@@ -125,11 +237,45 @@ server <- function(input, output, session) {
     output$esito_controlli <- renderUI({
         req(dati(), input$col_contr, input$col_prov)
         e <- esito()
-        style_ok  <- "color:#155724; background:#d4edda; border:1px solid #c3e6cb; padding:8px; border-radius:6px; white-space:pre-wrap;"
-        style_err <- "color:#721c24; background:#f8d7da; border:1px solid #f5c6cb; padding:8px; border-radius:6px; white-space:pre-wrap;"
+        
+        # Genera la lista di controlli con simboli
+        controlli_html <- lapply(e$controlli, function(c) {
+            simbolo <- if (c$ok) "✓" else "✗"
+            colore <- if (c$ok) "#155724" else "#721c24"
+            
+            if (!is.null(c$dettaglio)) {
+                tags$div(
+                    style = sprintf("margin-bottom:4px; color:%s;", colore),
+                    tags$span(style="font-weight:bold;", simbolo),
+                    " ",
+                    c$check,
+                    tags$br(),
+                    tags$span(style="margin-left:20px; font-size:0.9em;", c$dettaglio)
+                )
+            } else {
+                tags$div(
+                    style = sprintf("margin-bottom:4px; color:%s;", colore),
+                    tags$span(style="font-weight:bold;", simbolo),
+                    " ",
+                    c$check
+                )
+            }
+        })
+        
+        style_container <- if (isTRUE(e$ok)) {
+            "background:#d4edda; border:1px solid #c3e6cb; padding:8px; border-radius:6px;"
+        } else {
+            "background:#f8d7da; border:1px solid #f5c6cb; padding:8px; border-radius:6px;"
+        }
+        
         tagList(
             if (!is.null(e$info)) div(style="margin-bottom:6px;", strong("Riepilogo: "), e$info),
-            div(style = if (isTRUE(e$ok)) style_ok else style_err, e$msg)
+            div(
+                style = style_container,
+                strong(if (isTRUE(e$ok)) "✓ Tutti i controlli superati" else "✗ Controlli falliti"),
+                tags$hr(style="margin:8px 0;"),
+                controlli_html
+            )
         )
     })
     
