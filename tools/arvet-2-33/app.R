@@ -25,7 +25,7 @@ ui <- fluidPage(
             tags$ol(
                 tags$li("Seleziona il file .xlsx dal tuo computer."),
                 tags$li("Scegli la colonna 'provetta' (prima) e 'contrassegno' (dopo)."),
-                tags$li("Controlli: interi ≥1, sequenza completa 1..N, nessun duplicato in provetta e contrassegno, elenco completo di mancanti e duplicati."),
+                tags$li("Controlli: interi ≥1, sequenza completa 1..N, nessun duplicato in provetta e contrassegno."),
                 tags$li("Se tutto OK, esporta un CSV senza virgolette/intestazione (UTF-8, CRLF).")
             )
         )
